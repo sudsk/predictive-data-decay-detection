@@ -1,1 +1,20 @@
+chart_type,category,value,decay_score,health_status
+technology_trends,react,1250,0.12,healthy
+technology_trends,javascript,2100,0.25,healthy
+technology_trends,python,1800,0.18,healthy
+technology_trends,jquery,320,0.85,critical
+technology_trends,angular,890,0.65,warning
+technology_trends,nodejs,1450,0.23,healthy
+repository_health,tensorflow/tensorflow,15,0.15,healthy
+repository_health,jquery/jquery,75,0.75,critical
+repository_health,facebook/react,12,0.12,healthy
+repository_health,angular/angular.js,92,0.92,critical
+repository_health,microsoft/vscode,25,0.25,healthy
+repository_health,Company Wiki,58,0.58,warning
+repository_health,API Documentation,42,0.42,warning
+business_impact,Documentation,450,0.34,warning
+business_impact,Code Comments,2100,0.28,healthy
+business_impact,API Specifications,120,0.41,warning
+business_impact,Process Documents,300,0.52,warning
+business_impact,Training Materials,180,0.67,warning
 
