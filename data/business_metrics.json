@@ -1,1 +1,124 @@
-
+{
+  "executive_summary": {
+    "total_items_monitored": 2547,
+    "critical_items": 342,
+    "warning_items": 681,
+    "healthy_items": 1524,
+    "average_decay_score": 34.2,
+    "hours_at_risk_weekly": 17100,
+    "estimated_annual_cost_impact": 1710000,
+    "predicted_annual_savings": 8500000,
+    "roi_percentage": 1700,
+    "model_accuracy": 87.3
+  },
+  "technology_risks": [
+    {
+      "technology": "jQuery",
+      "decay_risk": 85,
+      "recommendation": "High Risk - Consider Migration",
+      "questions_analyzed": 1247,
+      "trend": "declining",
+      "migration_timeline": "6-12 months",
+      "estimated_migration_cost": 150000
+    },
+    {
+      "technology": "AngularJS",
+      "decay_risk": 78,
+      "recommendation": "High Risk - Consider Migration", 
+      "questions_analyzed": 892,
+      "trend": "declining",
+      "migration_timeline": "12-18 months",
+      "estimated_migration_cost": 200000
+    },
+    {
+      "technology": "Python 2",
+      "decay_risk": 95,
+      "recommendation": "Critical - Migrate Immediately",
+      "questions_analyzed": 567,
+      "trend": "critical",
+      "migration_timeline": "Immediate",
+      "estimated_migration_cost": 300000
+    },
+    {
+      "technology": "React",
+      "decay_risk": 12,
+      "recommendation": "Low Risk - Continue Using",
+      "questions_analyzed": 3456,
+      "trend": "improving",
+      "migration_timeline": "N/A",
+      "estimated_migration_cost": 0
+    },
+    {
+      "technology": "Node.js",
+      "decay_risk": 23,
+      "recommendation": "Low Risk - Continue Using",
+      "questions_analyzed": 2789,
+      "trend": "stable",
+      "migration_timeline": "N/A",
+      "estimated_migration_cost": 0
+    }
+  ],
+  "repository_health": [
+    {
+      "repository": "tensorflow/tensorflow",
+      "type": "GitHub",
+      "decay_score": 15,
+      "status": "healthy",
+      "critical_files": 0,
+      "warning_files": 3,
+      "healthy_files": 247,
+      "last_updated": "2 days ago",
+      "predicted_next_update": "1 week"
+    },
+    {
+      "repository": "jquery/jquery",
+      "type": "GitHub",
+      "decay_score": 75,
+      "status": "critical",
+      "critical_files": 12,
+      "warning_files": 8,
+      "healthy_files": 45,
+      "last_updated": "45 days ago",
+      "predicted_next_update": "Uncertain"
+    },
+    {
+      "repository": "Company Wiki",
+      "type": "Confluence",
+      "decay_score": 58,
+      "status": "warning",
+      "critical_files": 23,
+      "warning_files": 67,
+      "healthy_files": 156,
+      "last_updated": "12 days ago",
+      "predicted_next_update": "2 weeks"
+    }
+  ],
+  "predictions": {
+    "next_30_days": {
+      "expected_critical_alerts": 15,
+      "expected_warning_alerts": 28,
+      "repositories_needing_attention": 8,
+      "estimated_hours_to_fix": 120
+    },
+    "next_90_days": {
+      "expected_critical_alerts": 45,
+      "expected_warning_alerts": 85,
+      "repositories_needing_attention": 23,
+      "estimated_hours_to_fix": 380
+    }
+  },
+  "cost_savings": {
+    "monthly_savings": {
+      "prevented_bad_decisions": 450000,
+      "reduced_rework": 200000,
+      "faster_onboarding": 100000,
+      "total": 750000
+    },
+    "annual_projections": {
+      "productivity_gains": 6000000,
+      "risk_mitigation": 2000000,
+      "compliance_savings": 500000,
+      "total": 8500000
+    }
+  }
+}
