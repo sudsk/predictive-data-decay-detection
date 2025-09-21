@@ -4,58 +4,47 @@
 -- ================================================================
 
 -- This script creates the required AI models for the hackathon demo
--- Replace 'your-project-id' with your actual Google Cloud Project ID
+-- Using latest Gemini models for optimal performance
 
 -- ================================================================
--- TEXT EMBEDDING MODEL SETUP
+-- GEMINI EMBEDDING MODEL SETUP
 -- ================================================================
 
--- Create text embedding model for content vectorization
-CREATE OR REPLACE MODEL `your-project-id.decay_detection.text_embedding_model`
+-- Create Gemini embedding model for content vectorization
+CREATE OR REPLACE MODEL `decay_detection.gemini_embedding_model`
 OPTIONS(
   model_type='REMOTE',
-  endpoint='//aiplatform.googleapis.com/projects/your-project-id/locations/us-central1/publishers/google/models/textembedding-gecko'
+  endpoint='//aiplatform.googleapis.com/projects/PROJECT_ID/locations/us-central1/publishers/google/models/textembedding-gecko'
 );
 
 -- ================================================================ 
--- GEMINI MODEL SETUP FOR TEXT GENERATION
+-- GEMINI 2.5 FLASH MODEL SETUP
 -- ================================================================
 
--- Create Gemini model for AI text generation and analysis
-CREATE OR REPLACE MODEL `your-project-id.decay_detection.gemini_model`
+-- Create Gemini 2.5 Flash model for AI text generation and analysis
+CREATE OR REPLACE MODEL `decay_detection.gemini_flash_model`
 OPTIONS(
   model_type='REMOTE', 
-  endpoint='//aiplatform.googleapis.com/projects/your-project-id/locations/us-central1/publishers/google/models/gemini-pro'
+  endpoint='//aiplatform.googleapis.com/projects/PROJECT_ID/locations/us-central1/publishers/google/models/gemini-1.5-flash'
 );
-
--- ================================================================
--- ALTERNATIVE: GEMINI 1.5 MODEL (More Advanced)
--- ================================================================
-
--- Uncomment this if you want to use Gemini 1.5 Flash for better performance
--- CREATE OR REPLACE MODEL `your-project-id.decay_detection.gemini_flash_model`
--- OPTIONS(
---   model_type='REMOTE',
---   endpoint='//aiplatform.googleapis.com/projects/your-project-id/locations/us-central1/publishers/google/models/gemini-1.5-flash'
--- );
 
 -- ================================================================
 -- VERIFICATION QUERIES
 -- ================================================================
 
--- Test the text embedding model
+-- Test the embedding model
 SELECT 
-  'Testing text embedding model...' as test_description,
+  'Testing Gemini embedding model...' as test_description,
   ML.GENERATE_EMBEDDING(
-    MODEL `your-project-id.decay_detection.text_embedding_model`,
+    MODEL `decay_detection.gemini_embedding_model`,
     'This is a test of the text embedding functionality for data decay detection.'
   ) as embedding_result;
 
--- Test the Gemini model  
+-- Test the Gemini Flash model  
 SELECT 
-  'Testing Gemini model...' as test_description,
+  'Testing Gemini 2.5 Flash model...' as test_description,
   AI.GENERATE_TEXT(
-    MODEL `your-project-id.decay_detection.gemini_model`,
+    MODEL `decay_detection.gemini_flash_model`,
     'Explain in one sentence what predictive data decay detection means for enterprises.'
   ) as generation_result;
 
@@ -63,32 +52,46 @@ SELECT
 SELECT 
   'Testing decay scoring...' as test_description,
   AI.GENERATE_DOUBLE(
-    MODEL `your-project-id.decay_detection.gemini_model`,
+    MODEL `decay_detection.gemini_flash_model`,
     'Rate the staleness probability (0-1) of a jQuery tutorial written in 2020. Consider current web development trends.'
   ) as decay_score;
+
+-- Test structured output generation
+SELECT 
+  'Testing structured output...' as test_description,
+  AI.GENERATE_TABLE(
+    MODEL `decay_detection.gemini_flash_model`,
+    'Generate a recommendation table for updating outdated jQuery documentation with columns: priority, action, timeline, effort.',
+    STRUCT<
+      priority STRING,
+      action STRING,
+      timeline STRING,
+      effort STRING
+    >[]
+  ) as structured_result;
 
 -- ================================================================
 -- DATASET VERIFICATION
 -- ================================================================
 
--- Verify the decay_detection dataset exists
+-- Verify the decay_detection dataset exists and models are created
 SELECT 
-  schema_name,
-  creation_time,
-  location
-FROM `your-project-id.decay_detection.INFORMATION_SCHEMA.SCHEMATA`
-WHERE schema_name = 'decay_detection';
+  table_name,
+  table_type,
+  creation_time
+FROM `decay_detection.INFORMATION_SCHEMA.TABLES`
+WHERE table_type = 'MODEL'
+ORDER BY creation_time DESC;
 
 -- ================================================================
--- PERMISSIONS CHECK
+-- PERMISSIONS AND SETUP VERIFICATION
 -- ================================================================
 
--- Verify you have the necessary permissions
--- This query will succeed if you have proper access to BigQuery AI functions
+-- Final verification that everything is working
 SELECT 
   'BigQuery AI setup verification complete!' as status,
   CURRENT_TIMESTAMP() as setup_time,
-  @@project_id as project_id;
+  'decay_detection dataset ready for hackathon demo' as message;
 
 -- ================================================================
 -- USAGE NOTES
